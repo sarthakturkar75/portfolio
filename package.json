@@ -1,0 +1,31 @@
+{
+    "name": "portfolio",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev --turbopack",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint"
+    },
+    "dependencies": {
+        "bootstrap-icons": "^1.11.3",
+        "framer-motion": "latest",
+        "next": "latest",
+        "react": "latest",
+        "react-dom": "latest",
+        "react-hook-form": "latest",
+        "styled-components": "^6.1.15",
+        "swr": "latest"
+    },
+    "devDependencies": {
+        "@tailwindcss/postcss": "latest",
+        "@types/node": "22.13.8",
+        "@types/react": "19.0.10",
+        "autoprefixer": "latest",
+        "babel-plugin-styled-components": "^2.1.4",
+        "postcss": "latest",
+        "tailwindcss": "latest",
+        "typescript": "5.8.2"
+    }
+}
