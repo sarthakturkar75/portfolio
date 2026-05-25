@@ -1,106 +1,41 @@
-import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import Card from '../components/Card';
-import ProjectCard from '../components/ProjectCard';
-import Button from '../components/ContactCard';
-import AboutMeCard from '../components/AboutMeCard';
-import ProjectList from '../components/ProjectList';
-import '../styles/index.css';
-
-// Example project data
-const projectData = [
-	{
-		id: 1,
-		title: 'E-commerce Platform',
-		subtitle: 'Next.js Store',
-		description: 'A full-featured e-commerce platform.',
-		imageUrl: '/images/project1.jpg',
-	},
-	{
-		id: 2,
-		title: 'Mobile App',
-		subtitle: 'React Native',
-		description: 'A cross-platform mobile app.',
-		imageUrl: '/images/project2.jpg',
-	},
-	{
-		id: 3,
-		title: 'Data Dashboard',
-		subtitle: 'Interactive D3',
-		description: 'Dashboard with advanced data viz.',
-		imageUrl: '/images/project3.jpg',
-	}
-];
+import React from 'react';
+import Head from 'next/head';
+import HeroSection from '../components/HeroSection';
+import AboutSection from '../components/AboutSection';
+import ExperienceSection from '../components/ExperienceSection';
+import CertificationsSection from '../components/CertificationsSection';
+import ContactSection from '../components/ContactSection';
 
 export default function Home() {
-	const [scrollDirection, setScrollDirection] = useState(null);
-	const [lastScrollTop, setLastScrollTop] = useState(0);
+  return (
+    <div className="bg-background text-white min-h-screen w-full selection:bg-primary/30 selection:text-white">
+      <Head>
+        <title>Sarthak Turkar | Lead AI Systems Architect</title>
+        <meta name="description" content="Portfolio of Sarthak Turkar - Lead AI Systems Architect specializing in intelligent vision ecosystems and robotics orchestration." />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
 
-	useEffect(() => {
-		const handleScroll = () => {
-			const scrollTop = window.scrollY;
-			const sections = document.querySelectorAll("section");
-
-			sections.forEach((section) => {
-				const rect = section.getBoundingClientRect();
-				if (rect.top < window.innerHeight * 0.8) {
-					section.classList.add("visible");
-					section.classList.remove("hidden");
-				} else {
-					// If scrolling up, apply exit transition
-					if (scrollTop < lastScrollTop) {
-						section.classList.add("hidden");
-						section.classList.remove("visible");
-					}
-				}
-			});
-
-			setScrollDirection(scrollTop > lastScrollTop ? "down" : "up");
-			setLastScrollTop(scrollTop <= 0 ? 0 : scrollTop); // For mobile scrolling
-		};
-
-		window.addEventListener("scroll", handleScroll);
-		return () => window.removeEventListener("scroll", handleScroll);
-	}, [lastScrollTop]);
-
-	return (
-		<div className="bg-gray-900 text-white min-h-screen w-full">
-
-			{/* INTRO SECTION (Cube in between About Me & Project List) */}
-			<section id="intro" className="hidden">
-				<motion.div className="about-me">
-					<AboutMeCard />
-				</motion.div>
-
-				<motion.div className="cube-container">
-					<Card />
-				</motion.div>
-
-				<motion.div className="project-list">
-					<ProjectList />
-				</motion.div>
-			</section>
-
-			{/* PROJECTS + CONTACT SECTION (Combined) */}
-			<section id="projects-contact-wrapper" className="hidden">
-
-				<motion.div className="project-cards">
-					{projectData.map((proj) => (
-						<ProjectCard
-							key={proj.id}
-							title={proj.title}
-							subtitle={proj.subtitle}
-							description={proj.description}
-							imageUrl={proj.imageUrl}
-						/>
-					))}
-				</motion.div>
-
-				{/* CONTACT CARD - Now part of the same section */}
-				<motion.div className="contact-card">
-					<Button />
-				</motion.div>
-			</section>
-		</div>
-	);
+      <main className="relative w-full h-full">
+        {/* Global ambient background noise or texture could go here */}
+        
+        <HeroSection />
+        
+        <div className="relative z-10 bg-surface/30 backdrop-blur-3xl border-t border-white/5">
+          <AboutSection />
+        </div>
+        
+        <div className="relative z-10 border-t border-white/5">
+          <ExperienceSection />
+        </div>
+        
+        <div className="relative z-10 bg-surface/30 backdrop-blur-3xl border-t border-white/5">
+          <CertificationsSection />
+        </div>
+        
+        <div className="relative z-10 border-t border-white/5">
+          <ContactSection />
+        </div>
+      </main>
+    </div>
+  );
 }
