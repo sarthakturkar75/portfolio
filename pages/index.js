@@ -3,6 +3,7 @@ import Head from 'next/head';
 import HeroSection from '../components/HeroSection';
 import AboutSection from '../components/AboutSection';
 import ExperienceSection from '../components/ExperienceSection';
+import ProjectsSection from '../components/ProjectsSection';
 import CertificationsSection from '../components/CertificationsSection';
 import ContactSection from '../components/ContactSection';
 
@@ -29,6 +30,10 @@ export default function Home() {
         </div>
         
         <div className="relative z-10 bg-surface/30 backdrop-blur-3xl border-t border-white/5">
+          <ProjectsSection />
+        </div>
+        
+        <div className="relative z-10 border-t border-white/5">
           <CertificationsSection />
         </div>
         
