@@ -6,7 +6,7 @@ const mainProject = {
   tech: ["Robotics", "AGV Protocols", "Closed-loop Control", "AI Perception", "6-DOF Robotics"],
   description: "Designed the centralized software 'brain' for the Mobile Integrated Manufacturing System (MIMS). This system orchestrates complex AI perception directly with 6-DOF robotics and AGV protocols, achieving deterministic, sub-millisecond synchronization and 0.01mm gantry precision.",
   highlight: "Featured Flagship Architecture",
-  image: "/images/mims.png"
+  image: "/portfolio/images/mims.png"
 };
 
 const otherProjects = [
@@ -15,21 +15,21 @@ const otherProjects = [
     tech: ["Python", "YOLOv8", "Docker", "FastAPI", "Microservices"],
     description: "A microservices-based vision ecosystem. Standardized edge-AI deployment and high-speed inspection for Fortune 500 clients.",
     highlight: "Edge-AI Architecture",
-    image: "/images/rudraa.png"
+    image: "/portfolio/images/rudraa.png"
   },
   {
     title: "Hitachi High-Speed Pipeline",
     tech: ["Deep Learning", "MediaPipe", "Real-time Tracking"],
     description: "A high-speed AI sorting pipeline validating the architectural feasibility of deep learning for real-time industrial asset tracking, including rigorous performance profiling to define baseline latency metrics.",
     highlight: "High-Speed Vision",
-    image: "/images/hitachi.png"
+    image: "/portfolio/images/hitachi.png"
   },
   {
     title: "SETUU Internal Tooling",
     tech: ["Flutter", "Supabase", "Project Management", "Dart"],
     description: "Robust internal project management tooling built with Flutter and Supabase, streamlining team workflows and accelerating development cycles across multiple squads.",
     highlight: "Internal Tooling",
-    image: "/images/setuu.png"
+    image: "/portfolio/images/setuu.png"
   }
 ];
 
