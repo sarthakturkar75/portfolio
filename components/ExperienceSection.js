@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 const experiences = [
   {
@@ -42,43 +42,59 @@ const experiences = [
 ];
 
 export default function ExperienceSection() {
+  const containerRef = useRef(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end center"]
+  });
+
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
   return (
-    <section id="experience" className="py-24 px-6 max-w-4xl mx-auto">
-      <div className="mb-16 md:text-left text-center">
-        <h2 className="text-4xl md:text-5xl font-display font-bold mb-4">Professional <span className="text-secondary">Journey</span></h2>
-        <p className="text-gray-400 text-lg">My path through intelligent systems and software architecture.</p>
+    <section id="experience" className="py-32 px-6 max-w-4xl mx-auto" ref={containerRef}>
+      <div className="mb-20 md:text-left text-center">
+        <h2 className="text-4xl md:text-6xl font-display font-bold mb-4">Professional <span className="text-secondary">Journey</span></h2>
+        <p className="text-gray-400 text-lg md:text-xl font-light">My path through intelligent systems and software architecture.</p>
       </div>
 
-      <div className="space-y-12">
+      <div className="relative space-y-16">
+        {/* The Animated Scroll Line */}
+        <div className="hidden md:block absolute left-[-39px] top-4 bottom-0 w-1 bg-white/5 rounded-full overflow-hidden">
+          <motion.div 
+            className="w-full bg-gradient-to-b from-secondary to-primary rounded-full origin-top"
+            style={{ height: lineHeight }}
+          />
+        </div>
+
         {experiences.map((exp, index) => (
           <motion.div
             key={index}
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
             className="relative pl-8 md:pl-0"
           >
-            {/* Timeline line for mobile / desktop alignment */}
-            <div className="hidden md:block absolute left-[-40px] top-2 bottom-[-48px] w-0.5 bg-white/10 last:hidden" />
-            
-            <div className="md:relative glass-card border-l-4 border-l-secondary hover:border-l-primary group">
-              <div className="absolute -left-10 md:-left-[58px] top-6 w-4 h-4 rounded-full bg-secondary group-hover:bg-primary group-hover:shadow-[0_0_10px_rgba(0,240,255,0.8)] transition-all z-10 hidden md:block" />
+            <div className="md:relative glass-card border-l-4 border-l-secondary hover:border-l-primary group interactive transition-all duration-500 hover:translate-x-2">
+              {/* Timeline dot */}
+              <div className="absolute -left-10 md:-left-[60px] top-6 w-5 h-5 rounded-full bg-[#121212] border-4 border-secondary group-hover:border-primary group-hover:shadow-[0_0_15px_rgba(0,240,255,0.8)] transition-all z-10 hidden md:block duration-500" />
               
-              <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
+              <div className="flex flex-col md:flex-row md:items-center justify-between mb-6">
                 <div>
-                  <h3 className="text-2xl font-bold text-white group-hover:text-primary transition-colors">{exp.role}</h3>
-                  <p className="text-lg text-gray-300 font-medium">{exp.company}</p>
+                  <h3 className="text-2xl font-bold text-white group-hover:text-primary transition-colors duration-300">{exp.role}</h3>
+                  <p className="text-lg text-gray-400 font-medium">{exp.company}</p>
                 </div>
-                <div className="mt-2 md:mt-0 text-secondary font-mono text-sm bg-secondary/10 px-3 py-1 rounded-full border border-secondary/20 inline-block w-fit">
+                <div className="mt-4 md:mt-0 text-secondary font-mono text-sm bg-secondary/10 px-4 py-2 rounded-full border border-secondary/20 inline-block w-fit tracking-wider">
                   {exp.period}
                 </div>
               </div>
               
-              <ul className="list-disc list-inside space-y-2 text-gray-400">
+              <ul className="space-y-4 text-gray-400 font-light">
                 {exp.details.map((detail, idx) => (
-                  <li key={idx} className="leading-relaxed">
-                    <span className="text-gray-300 -ml-2">{detail}</span>
+                  <li key={idx} className="leading-relaxed flex items-start">
+                    <span className="text-primary mr-3 mt-1">▹</span>
+                    <span className="text-gray-300">{detail}</span>
                   </li>
                 ))}
               </ul>
